@@ -1,0 +1,15 @@
+resources:
+  - name: iac-project-terraform-backend-sandbox-hateen0808
+    type: storage.v1.bucket
+    properties:
+      location: "asia-northeast1"
+      locationType: "dual-region"
+      storageClass: "STANDARD"
+      versioning:
+        enabled: true
+      lifecycle:
+        rule:
+          - action:
+              type: Delete
+            condition:
+              age: 365
