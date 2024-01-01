@@ -21,3 +21,8 @@ resource "google_storage_bucket" "storage_public_dev" {
   uniform_bucket_level_access = true
 }
 # terraform import google_storage_bucket.storage_public_dev storage-public-dev
+
+resource "google_storage_bucket" "import_test_bucket" {
+  name     = "import-test-bucket-080801"
+  location = "ASIA1"
+}
