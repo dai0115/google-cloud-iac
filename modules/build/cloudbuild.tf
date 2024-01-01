@@ -4,7 +4,7 @@
 
 resource "google_cloudbuild_trigger" "deploy_to_cloud_run" {
   location = "global"
-  name     = "deploy-to-cloud-run"
+  name     = "${var.environment}-deploy-to-cloud-run"
   filename = "cloudbuild-dev.yml"
 
   github {

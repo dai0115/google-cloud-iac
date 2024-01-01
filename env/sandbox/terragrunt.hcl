@@ -32,3 +32,7 @@ provider "google" {
 }
 EOF
 }
+
+inputs = {
+  environment = "sandbox"
+}
