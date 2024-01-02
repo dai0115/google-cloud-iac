@@ -1,5 +1,7 @@
 terragrunt_version_constraint = "v0.54.12"
 
+skip = true
+
 remote_state {
   backend = "gcs"
   config = {
