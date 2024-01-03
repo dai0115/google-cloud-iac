@@ -75,6 +75,9 @@ resource "google_project_service" "service_networking" {
   disable_on_destroy = false
 }
 
+# applyやimportには支障がなさそうだが、以下の問題が報告されておりdestroy時にエラーが出る
+# https://github.com/hashicorp/terraform-provider-google/issues/16275
+# 解決されるまでに削除が必要な場合、`terraform state rm`とwebコンソールからの削除が必要
 resource "google_service_networking_connection" "private_connection" {
   network                 = data.google_compute_network.vpc_default_network.self_link
   service                 = "servicenetworking.googleapis.com"
