@@ -37,4 +37,5 @@ EOF
 
 inputs = {
   environment = "sandbox"
+  project = "project"
 }
