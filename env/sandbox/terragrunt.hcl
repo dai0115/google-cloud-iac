@@ -38,4 +38,5 @@ EOF
 inputs = {
   environment = "sandbox"
   project = "project"
+  location = "asia-northeast1"
 }
