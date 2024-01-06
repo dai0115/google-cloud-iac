@@ -11,7 +11,7 @@ env:
   working_dir: "env/sandbox/storage"
 
 jobs:
-  authentication:
+  plan:
     # Add "id-token" with the intended permissions.
     runs-on: "ubuntu-latest"
     permissions:
@@ -25,14 +25,8 @@ jobs:
         with:
           project_id: ${{ secrets.PROJECT_ID }}
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-  plan:
-    runs-on: ubuntu-latest
-    needs: [authentication]
-    steps:
-      - uses: "actions/checkout@v4"
 
-      - name: Plan
-        uses: gruntwork-io/terragrunt-action@v2
+      - uses: gruntwork-io/terragrunt-action@v2
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}
