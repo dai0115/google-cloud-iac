@@ -9,6 +9,7 @@ remote_state {
     bucket = "iac-project-terraform-backend-sandbox-hateen0808"
     prefix = "${path_relative_to_include()}"
     project = "iac-sandbox-0808"
+    location = "asia1"
   }
 }
 
