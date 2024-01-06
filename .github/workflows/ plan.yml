@@ -1,0 +1,40 @@
+name: "Terragrunt GitHub Actions"
+
+on:
+  push:
+    branches:
+      - "main"
+
+env:
+  tf_version: "1.6.6"
+  tg_version: "0.54.12"
+  working_dir: "env/sandbox/storage"
+
+jobs:
+  authentication:
+    # Add "id-token" with the intended permissions.
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: "actions/checkout@v4"
+
+      - uses: "google-github-actions/auth@v2"
+        with:
+          project_id: ${{ secrets.PROJECT_ID }}
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+  plan:
+    runs-on: ubuntu-latest
+    needs: [authentication]
+    steps:
+      - uses: "actions/checkout@v4"
+
+      - name: Plan
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: "plan"
