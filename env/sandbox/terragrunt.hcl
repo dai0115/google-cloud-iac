@@ -4,10 +4,11 @@ skip = true
 
 remote_state {
   backend = "gcs"
-  project = "iac-sandbox-0808"
+
   config = {
     bucket = "iac-project-terraform-backend-sandbox-hateen0808"
     prefix = "${path_relative_to_include()}"
+    project = "iac-sandbox-0808"
   }
 }
 
