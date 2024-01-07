@@ -30,12 +30,9 @@ jobs:
         with:
           terraform_version: ${{ env.tf_version }}
 
-      - name: Setup Terragrunt v0.54.12
-        run: |
-          sudo wget -q -O /bin/terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v${{ env.tg_version }}/terragrunt_linux_amd64"
-          sudo chmod +x /bin/terragrunt
-          terragrunt -v
-
-      - name: Terragrunt init
-        working-directory: ${{ env.working_dir }}
-        run: gcloud storage buckets list --project ${{ secrets.PROJECT_ID }}
+      - uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: "plan"
