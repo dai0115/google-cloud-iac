@@ -8,7 +8,7 @@ on:
 env:
   tf_version: "1.6.6"
   tg_version: "0.54.12"
-  working_dir: "env/sandbox/storage"
+  working_dir: "env/sandbox/build"
 
 jobs:
   plan:
