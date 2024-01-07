@@ -37,4 +37,4 @@ jobs:
 
       - name: Terragrunt init
         working-directory: ${{ env.working_dir }}
-        run: terragrunt init
+        run: gcloud storage buckets list
