@@ -3,16 +3,15 @@ name: "Terragrunt GitHub Actions"
 on:
   push:
     branches:
-      - "main"
+      - "main" # change
 
 env:
   tf_version: "1.6.6"
   tg_version: "0.54.12"
-  working_dir: "env/sandbox/build"
+  working_dir: "env/sandbox" # change
 
 jobs:
   plan:
-    # Add "id-token" with the intended permissions.
     runs-on: "ubuntu-latest"
     permissions:
       contents: read
@@ -30,9 +29,12 @@ jobs:
         with:
           terraform_version: ${{ env.tf_version }}
 
-      - uses: gruntwork-io/terragrunt-action@v2
-        with:
-          tf_version: ${{ env.tf_version }}
-          tg_version: ${{ env.tg_version }}
-          tg_dir: ${{ env.working_dir }}
-          tg_command: "plan"
+      - name: Setup Terragrunt
+        run: |
+          sudo wget -q -O /bin/terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v${{ env.tg_version }}/terragrunt_linux_amd64"
+          sudo chmod +x /bin/terragrunt
+          terragrunt -v
+
+      - name: Terragrunt init
+        working-directory: ${{ env.working_dir }}
+        run: terragrunt run-all plan
